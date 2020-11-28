@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import "./Movie.css";
 
 function Movie({ id, title, overview, poster, releaseDate }) {
+    const POSTER_WIDTH = 200;
+
     const posterPath = poster
         ? process.env.REACT_APP_IMAGE_URL + poster
         : null;
@@ -10,7 +12,7 @@ function Movie({ id, title, overview, poster, releaseDate }) {
     return (
         <div className="movie">
             {posterPath && (
-                <img src={posterPath} alt={title} title={title} width={200} />
+                <img src={posterPath} alt={title} title={title} width={POSTER_WIDTH} />
             )}
             <div className="movie__data">
                 <h3 className="movie__title">{ title }</h3>
