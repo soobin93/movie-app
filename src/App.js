@@ -7,7 +7,8 @@ import "./App.css";
 class App extends React.Component {
   state = {
     isLoading: true,
-    movies: []
+    movies: [],
+    genres: []
   };
 
   getMovies = async () => {
@@ -17,18 +18,32 @@ class App extends React.Component {
       }
     });
 
+    return results;
+  };
+
+  getGenres = async () => {
+    const response = await axios.get(`${process.env.REACT_APP_API_URL}/genre/movie/list`, {
+      params: {
+        api_key: process.env.REACT_APP_API_KEY
+      }
+    });
+
+    return response.data.genres;
+  };
+
+  async componentDidMount() {
+    const movies = await this.getMovies();
+    const genres = await this.getGenres();
+
     this.setState({
       isLoading: false,
-      movies: results
-    })
-  }
-
-  componentDidMount() {
-    this.getMovies();
+      movies,
+      genres
+    });
   }
 
   render() {
-    const { isLoading, movies } = this.state;
+    const { isLoading, movies, genres } = this.state;
 
     return (
       <section className="container">
@@ -47,6 +62,8 @@ class App extends React.Component {
                     overview={movie.overview}
                     poster={movie.poster_path}
                     releaseDate={movie.release_date}
+                    genreIds={movie.genre_ids}
+                    genres={genres}
                   />
                 ))}
             </div>
