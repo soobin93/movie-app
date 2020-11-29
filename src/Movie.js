@@ -5,10 +5,12 @@ import "./Movie.css";
 function Movie({ id, title, overview, poster, releaseDate, genreIds, genres }) {
     const POSTER_WIDTH = 200;
 
+    // Get Poster Path
     const posterPath = poster
         ? process.env.REACT_APP_IMAGE_URL + poster
         : null;
 
+    // Get Genre Names
     let genreNames = [];
 
     genres.forEach(genre => {
