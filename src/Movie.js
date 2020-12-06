@@ -34,7 +34,7 @@ function Movie({ id, title, overview, poster, releaseDate, genreIds, genres }) {
                         </li>
                     )}
                 </ul>
-                <p className="movie__overview">{ overview }</p>
+                <p className="movie__overview">{ overview.slice(0, 180) }...</p>
             </div>
         </div>
     );
